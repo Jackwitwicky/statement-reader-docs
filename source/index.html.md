@@ -63,6 +63,22 @@ Statement Reader expects for the API key to be included in all API requests to t
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 
+# Supported Banks
+
+This is a list of Kenyan bank statements our platform can successfully analyse. Together with the proper key to use 
+when submitting analysis requests
+
+Bank Name | Bank Key | Status
+--------- | ------- | -----------
+NCBA | ncba | available
+KCB | kcb | in-development
+E-quity | equity | in-development
+NCBA Loop | loop | in-development
+Co-Operative Bank | coop | in-development
+National Bank | national | in-development
+Family Bank | family | in-development
+
+
 # Analysis Request
 
 ## Analyse Statement
