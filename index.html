@@ -228,6 +228,9 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
+            <a href="#supported-banks" class="toc-h1 toc-link" data-title="Supported Banks">Supported Banks</a>
+          </li>
+          <li>
             <a href="#analysis-request" class="toc-h1 toc-link" data-title="Analysis Request">Analysis Request</a>
               <ul class="toc-list-h2">
                   <li>
@@ -284,6 +287,53 @@ curl <span class="s2">"api_endpoint_here"</span>
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
+<h1 id='supported-banks'>Supported Banks</h1>
+<p>This is a list of Kenyan bank statements our platform can successfully analyse. Together with the proper key to use 
+when submitting analysis requests</p>
+
+<table><thead>
+<tr>
+<th>Bank Name</th>
+<th>Bank Key</th>
+<th>Status</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NCBA</td>
+<td>ncba</td>
+<td>available</td>
+</tr>
+<tr>
+<td>KCB</td>
+<td>kcb</td>
+<td>in-development</td>
+</tr>
+<tr>
+<td>E-quity</td>
+<td>equity</td>
+<td>in-development</td>
+</tr>
+<tr>
+<td>NCBA Loop</td>
+<td>loop</td>
+<td>in-development</td>
+</tr>
+<tr>
+<td>Co-Operative Bank</td>
+<td>coop</td>
+<td>in-development</td>
+</tr>
+<tr>
+<td>National Bank</td>
+<td>national</td>
+<td>in-development</td>
+</tr>
+<tr>
+<td>Family Bank</td>
+<td>family</td>
+<td>in-development</td>
+</tr>
+</tbody></table>
 <h1 id='analysis-request'>Analysis Request</h1><h2 id='analyse-statement'>Analyse Statement</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
