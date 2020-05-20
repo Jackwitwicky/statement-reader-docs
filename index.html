@@ -228,16 +228,13 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#analysis-request" class="toc-h1 toc-link" data-title="Analysis Request">Analysis Request</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#analyse-statement" class="toc-h2 toc-link" data-title="Analyse Statement">Analyse Statement</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
-                  </li>
-                  <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#get-a-specific-analysis-result" class="toc-h2 toc-link" data-title="Get a Specific Analysis Result">Get a Specific Analysis Result</a>
                   </li>
               </ul>
           </li>
@@ -254,14 +251,12 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the Statement Reader API! You can use our API to access Statement Reader endpoints, which can help you analyse a user&#39;s bank statement and return json data ready for further analysis.</p>
 
 <p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/slatedocs/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>Authorization of API is still under development. In the meantime, you can send requests as we test out the core functionality of the API. Please use this power responsibly.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
@@ -280,16 +275,16 @@ curl <span class="s2">"api_endpoint_here"</span>
 <p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
 </blockquote>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>Statement Reader uses API keys to allow access to the API. You can register a new Statenent Reader API key at our <a href="http://example.com/developers">developer portal</a>.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>Statement Reader expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
 
 <p><code>Authorization: meowmeowmeow</code></p>
 
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='analysis-request'>Analysis Request</h1><h2 id='analyse-statement'>Analyse Statement</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
@@ -297,7 +292,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:3000/api/v1/analysis_request"</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
 
@@ -307,26 +302,41 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"statement_summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29f7926d-1c7b-4a7b-b5c2-d1d22b1d6cf8"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"opening_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">13075.84</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"payments_in"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"payments_out"</span><span class="p">:</span><span class="w"> </span><span class="mf">2075.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">110000.84</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"closing_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">10000.84</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"began_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"closed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-30T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"statement_transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">75.0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Transaction Charge"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"remaining_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">13000.84</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description_metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"254712456765 FTC191106MNAF"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transacted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-06T00:00:00.000Z"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">20000.0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">" m-Banking Transfer"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"remaining_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">10000.84</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description_metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"254712456765 FTC191106MNAF"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transacted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-06T00:00:00.000Z"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves all kittens.</p>
+<p>This endpoint submits a bank statement to obtain analysis data</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
+<p><code>POST localhost:3000/api/v1/analysis_request</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -336,21 +346,26 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>bank_name</td>
+<td>ncba</td>
+<td>This is the string denoting the bank this statement is for</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>statement_url</td>
+<td>nil</td>
+<td>This is the path to the uploaded pdf bank statement you would like to analyse</td>
+</tr>
+<tr>
+<td>statement_password</td>
+<td>nil</td>
+<td>Contains the password to unlock the statement. Can be blank if statement does not need a password</td>
 </tr>
 </tbody></table>
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Remember — In future this endpoint will need to be Authenticated
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='get-a-specific-analysis-result'>Get a Specific Analysis Result</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -358,7 +373,7 @@ Remember — a happy kitten is an authenticated kitten!
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:3000/api/v1/fetch_analysis/statement_id"</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
 
@@ -368,19 +383,40 @@ Remember — a happy kitten is an authenticated kitten!
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"statement_summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29f7926d-1c7b-4a7b-b5c2-d1d22b1d6cf8"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"opening_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">13075.84</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"payments_in"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"payments_out"</span><span class="p">:</span><span class="w"> </span><span class="mf">2075.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">110000.84</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"closing_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">10000.84</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"began_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"closed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-30T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"statement_transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">75.0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Transaction Charge"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"remaining_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">13000.84</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description_metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"254712456765 FTC191106MNAF"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transacted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-06T00:00:00.000Z"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">20000.0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">" m-Banking Transfer"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"remaining_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">10000.84</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description_metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"254712456765 FTC191106MNAF"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transacted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-06T00:00:00.000Z"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<p>This endpoint retrieves a specific Analysis Result.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code>GET localhost:3000/api/v1/fetch_analysis/&lt;ID&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -390,54 +426,11 @@ Remember — a happy kitten is an authenticated kitten!
 </thead><tbody>
 <tr>
 <td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  <span class="nt">-X</span> DELETE
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>The ID of the Statement Summary. (Obtained when you submitted statement for analysis)</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
-
-<p>The Kittn API uses the following error codes:</p>
+<p>The Statement Reader API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -455,15 +448,15 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+<td>Forbidden -- The statement result requested is hidden for administrators only.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
+<td>Not Found -- The specified statement could not be found.</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+<td>Method Not Allowed -- You tried to access a statement result with an invalid method.</td>
 </tr>
 <tr>
 <td>406</td>
@@ -471,15 +464,11 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 </tr>
 <tr>
 <td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
+<td>Gone -- The statement result requested has been removed from our servers.</td>
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests -- You&#39;re requesting too many statement analysis! Slow down!</td>
 </tr>
 <tr>
 <td>500</td>
