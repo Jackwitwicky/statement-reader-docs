@@ -19,15 +19,13 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the Statement Reader API! You can use our API to access Statement Reader endpoints, which can help you analyse a user's bank statement and return json data ready for further analysis.
 
 We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
-
 # Authentication
 
-> To authorize, use this code:
+> Authorization of API is still under development. In the meantime, you can send requests as we test out the core functionality of the API. Please use this power responsibly.
 
 ```ruby
 require 'kittn'
@@ -55,9 +53,9 @@ let api = kittn.authorize('meowmeowmeow');
 
 > Make sure to replace `meowmeowmeow` with your API key.
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+Statement Reader uses API keys to allow access to the API. You can register a new Statenent Reader API key at our [developer portal](http://example.com/developers).
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+Statement Reader expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
 `Authorization: meowmeowmeow`
 
@@ -65,9 +63,9 @@ Kittn expects for the API key to be included in all API requests to the server i
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 
-# Kittens
+# Analysis Request
 
-## Get All Kittens
+## Analyse Statement
 
 ```ruby
 require 'kittn'
@@ -84,7 +82,7 @@ api.kittens.get()
 ```
 
 ```shell
-curl "http://example.com/api/kittens"
+curl "localhost:3000/api/v1/analysis_request"
   -H "Authorization: meowmeowmeow"
 ```
 
@@ -98,42 +96,58 @@ let kittens = api.kittens.get();
 > The above command returns JSON structured like this:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{
+    "statement_summary": {
+        "id": "29f7926d-1c7b-4a7b-b5c2-d1d22b1d6cf8",
+        "opening_balance": 13075.84,
+        "payments_in": 0.0,
+        "payments_out": 2075.0,
+        "available_balance": 110000.84,
+        "closing_balance": 10000.84,
+        "began_at": "2019-11-01T00:00:00.000Z",
+        "closed_at": "2019-11-30T00:00:00.000Z",
+        "statement_transactions": [
+            {
+                "id": 54,
+                "amount": 75.0,
+                "description": " Transaction Charge",
+                "transaction_type": "debit",
+                "remaining_balance": 13000.84,
+                "description_metadata": "254712456765 FTC191106MNAF",
+                "transacted_at": "2019-11-06T00:00:00.000Z"
+            },
+            {
+                "id": 55,
+                "amount": 20000.0,
+                "description": " m-Banking Transfer",
+                "transaction_type": "debit",
+                "remaining_balance": 10000.84,
+                "description_metadata": "254712456765 FTC191106MNAF",
+                "transacted_at": "2019-11-06T00:00:00.000Z"
+            }
+        ]
+    }
 ```
 
-This endpoint retrieves all kittens.
+This endpoint submits a bank statement to obtain analysis data
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`POST localhost:3000/api/v1/analysis_request`
 
 ### Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+bank_name | ncba | This is the string denoting the bank this statement is for
+statement_url | nil | This is the path to the uploaded pdf bank statement you would like to analyse
+statement_password  | nil | Contains the password to unlock the statement. Can be blank if statement does not need a password
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Remember — In future this endpoint will need to be Authenticated
 </aside>
 
-## Get a Specific Kitten
+## Get a Specific Analysis Result
 
 ```ruby
 require 'kittn'
@@ -150,7 +164,7 @@ api.kittens.get(2)
 ```
 
 ```shell
-curl "http://example.com/api/kittens/2"
+curl "localhost:3000/api/v1/fetch_analysis/statement_id"
   -H "Authorization: meowmeowmeow"
 ```
 
@@ -164,76 +178,48 @@ let max = api.kittens.get(2);
 > The above command returns JSON structured like this:
 
 ```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
+"statement_summary": {
+        "id": "29f7926d-1c7b-4a7b-b5c2-d1d22b1d6cf8",
+        "opening_balance": 13075.84,
+        "payments_in": 0.0,
+        "payments_out": 2075.0,
+        "available_balance": 110000.84,
+        "closing_balance": 10000.84,
+        "began_at": "2019-11-01T00:00:00.000Z",
+        "closed_at": "2019-11-30T00:00:00.000Z",
+        "statement_transactions": [
+            {
+                "id": 54,
+                "amount": 75.0,
+                "description": " Transaction Charge",
+                "transaction_type": "debit",
+                "remaining_balance": 13000.84,
+                "description_metadata": "254712456765 FTC191106MNAF",
+                "transacted_at": "2019-11-06T00:00:00.000Z"
+            },
+            {
+                "id": 55,
+                "amount": 20000.0,
+                "description": " m-Banking Transfer",
+                "transaction_type": "debit",
+                "remaining_balance": 10000.84,
+                "description_metadata": "254712456765 FTC191106MNAF",
+                "transacted_at": "2019-11-06T00:00:00.000Z"
+            }
+        ]
+    }
 ```
 
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+This endpoint retrieves a specific Analysis Result.
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET localhost:3000/api/v1/fetch_analysis/<ID>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to retrieve
+ID | The ID of the Statement Summary. (Obtained when you submitted statement for analysis)
 
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
 
