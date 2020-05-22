@@ -9,7 +9,6 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
   - errors
@@ -104,7 +103,7 @@ api.kittens.get()
 ```
 
 ```shell
-curl "localhost:3000/api/v1/analysis_request"
+curl "https://statement-readr.herokuapp.com/api/v1/analysis_request"
   -H "Authorization: meowmeowmeow"
 ```
 
@@ -160,7 +159,7 @@ This endpoint submits a bank statement to obtain analysis data
 
 ### HTTP Request
 
-`POST localhost:3000/api/v1/analysis_request`
+`POST https://statement-readr.herokuapp.com/api/v1/analysis_request`
 
 ### Query Parameters
 
@@ -191,7 +190,7 @@ api.kittens.get(2)
 ```
 
 ```shell
-curl "localhost:3000/api/v1/analysis_requests/<ID>"
+curl "https://statement-readr.herokuapp.com/api/v1/analysis_requests/<ID>"
   -H "Authorization: meowmeowmeow"
 ```
 
@@ -219,7 +218,7 @@ This endpoint retrieves a specific Analysis Request. It can be used to check the
 
 ### HTTP Request
 
-`GET localhost:3000/api/v1/analysis_requests/<ID>`
+`GET https://statement-readr.herokuapp.com/api/v1/analysis_requests/<ID>`
 
 ### URL Parameters
 
@@ -245,7 +244,7 @@ api.kittens.get(2)
 ```
 
 ```shell
-curl "localhost:3000/api/v1/fetch_analysis/statement_id"
+curl "https://statement-readr.herokuapp.com/api/v1/fetch_analysis/statement_id"
   -H "Authorization: meowmeowmeow"
 ```
 
@@ -301,7 +300,7 @@ This endpoint retrieves a specific Analysis Result.
 
 ### HTTP Request
 
-`GET localhost:3000/api/v1/fetch_analysis/<ID>`
+`GET https://statement-readr.herokuapp.com/api/v1/fetch_analysis/<ID>`
 
 ### URL Parameters
 
@@ -328,7 +327,7 @@ api.kittens.get()
 ```
 
 ```shell
-curl "localhost:3000/api/v1/statement_summaries/<ID>"
+curl "https://statement-readr.herokuapp.com/api/v1/statement_summaries/<ID>"
   -H "Authorization: meowmeowmeow"
 ```
 
@@ -360,7 +359,7 @@ This endpoint queries for an existing statement summary for an already analysed 
 
 ### HTTP Request
 
-`GET localhost:3000/api/v1/statement_summaries/<ID>`
+`GET https://statement-readr.herokuapp.com/api/v1/statement_summaries/<ID>`
 
 ### Query Parameters
 
@@ -388,7 +387,7 @@ api.kittens.get()
 ```
 
 ```shell
-curl "localhost:3000/api/v1/statement_summaries/<ID>"
+curl "https://statement-readr.herokuapp.com/api/v1/statement_summaries/<ID>"
   -H "Authorization: meowmeowmeow"
 ```
 
@@ -419,7 +418,7 @@ This endpoint queries for an existing statement transcation for an already analy
 
 ### HTTP Request
 
-`GET localhost:3000/api/v1/statement_summaries/<ID>`
+`GET https://statement-readr.herokuapp.com/api/v1/statement_summaries/<ID>`
 
 ### Query Parameters
 
