@@ -237,7 +237,26 @@
                     <a href="#analyse-statement" class="toc-h2 toc-link" data-title="Analyse Statement">Analyse Statement</a>
                   </li>
                   <li>
+                    <a href="#get-analysis-status" class="toc-h2 toc-link" data-title="Get Analysis Status">Get Analysis Status</a>
+                  </li>
+                  <li>
                     <a href="#get-a-specific-analysis-result" class="toc-h2 toc-link" data-title="Get a Specific Analysis Result">Get a Specific Analysis Result</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#statement-summary" class="toc-h1 toc-link" data-title="Statement Summary">Statement Summary</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-statement-summary" class="toc-h2 toc-link" data-title="Get Statement Summary">Get Statement Summary</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#statement-transaction" class="toc-h1 toc-link" data-title="Statement Transaction">Statement Transaction</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-statement-transaction" class="toc-h2 toc-link" data-title="Get Statement Transaction">Get Statement Transaction</a>
                   </li>
               </ul>
           </li>
@@ -257,6 +276,14 @@
 <p>Welcome to the Statement Reader API! You can use our API to access Statement Reader endpoints, which can help you analyse a user&#39;s bank statement and return json data ready for further analysis.</p>
 
 <p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+
+<p>The API is grouped into three key sections</p>
+
+<ul>
+<li>Analysis Request --  This is used to submit a bank statement for analysis and parsing, together with getting the full analytical data for an already existing analysis</li>
+<li>Statement Summary - Used to get key summary for an analysed bank statement.</li>
+<li>Statement Transaction - You can use this to get details of a particular transaction from a bank statement</li>
+</ul>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>Authorization of API is still under development. In the meantime, you can send requests as we test out the core functionality of the API. Please use this power responsibly.</p>
@@ -353,6 +380,10 @@ when submitting analysis requests</p>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3a57d3c9-745c-4cd9-8bc4-ea3ed0fc5e54"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ncba"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-21T15:11:54.105Z"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"statement_summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29f7926d-1c7b-4a7b-b5c2-d1d22b1d6cf8"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"opening_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">13075.84</span><span class="p">,</span><span class="w">
@@ -369,7 +400,7 @@ when submitting analysis requests</p>
                 </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Transaction Charge"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"remaining_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">13000.84</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"description_metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"254712456765 FTC191106MNAF"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description_metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"254712456765 FTC209806BHSD"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"transacted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-06T00:00:00.000Z"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="p">{</span><span class="w">
@@ -378,11 +409,12 @@ when submitting analysis requests</p>
                 </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">" m-Banking Transfer"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"remaining_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">10000.84</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"description_metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"254712456765 FTC191106MNAF"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description_metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"254712456765 FTC209806BHSD"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"transacted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-06T00:00:00.000Z"</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint submits a bank statement to obtain analysis data</p>
 <h3 id='http-request'>HTTP Request</h3>
@@ -415,6 +447,48 @@ when submitting analysis requests</p>
 <aside class="success">
 Remember — In future this endpoint will need to be Authenticated
 </aside>
+<h2 id='get-analysis-status'>Get Analysis Status</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:3000/api/v1/analysis_requests/&lt;ID&gt;"</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"analysis_request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"03652226-a163-4177-8087-6ca9cfff7725"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ncba"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-21T10:42:28.365Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves a specific Analysis Request. It can be used to check the status of the request allowing you to only fetch the full analysis request details when the status is <code>success</code>. It will also show if the submitted request failed</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET localhost:3000/api/v1/analysis_requests/&lt;ID&gt;</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the Analysis Request. (Obtained when you submitted statement for analysis)</td>
+</tr>
+</tbody></table>
 <h2 id='get-a-specific-analysis-result'>Get a Specific Analysis Result</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
@@ -433,7 +507,12 @@ Remember — In future this endpoint will need to be Authenticated
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"statement_summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3a57d3c9-745c-4cd9-8bc4-ea3ed0fc5e54"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ncba"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-21T15:11:54.105Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"statement_summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29f7926d-1c7b-4a7b-b5c2-d1d22b1d6cf8"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"opening_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">13075.84</span><span class="p">,</span><span class="w">
         </span><span class="nl">"payments_in"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
@@ -449,7 +528,7 @@ Remember — In future this endpoint will need to be Authenticated
                 </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Transaction Charge"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"remaining_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">13000.84</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"description_metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"254712456765 FTC191106MNAF"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description_metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"254712456765 FTC209806BHSD"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"transacted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-06T00:00:00.000Z"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="p">{</span><span class="w">
@@ -458,16 +537,17 @@ Remember — In future this endpoint will need to be Authenticated
                 </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">" m-Banking Transfer"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"remaining_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">10000.84</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"description_metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"254712456765 FTC191106MNAF"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description_metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"254712456765 FTC209806BHSD"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"transacted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-06T00:00:00.000Z"</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves a specific Analysis Result.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET localhost:3000/api/v1/fetch_analysis/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -476,7 +556,98 @@ Remember — In future this endpoint will need to be Authenticated
 </thead><tbody>
 <tr>
 <td>ID</td>
-<td>The ID of the Statement Summary. (Obtained when you submitted statement for analysis)</td>
+<td>The ID of the Analysis Request. (Obtained when you submitted statement for analysis)</td>
+</tr>
+</tbody></table>
+<h1 id='statement-summary'>Statement Summary</h1><h2 id='get-statement-summary'>Get Statement Summary</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:3000/api/v1/statement_summaries/&lt;ID&gt;"</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"statement_summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"59281c69-59cc-49cf-aa3c-3173b7423552"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"opening_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">12000.84</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"payments_in"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"payments_out"</span><span class="p">:</span><span class="w"> </span><span class="mf">5000.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">7000.84</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"closing_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">7000.84</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"began_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"closed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-31T00:00:00.000Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint queries for an existing statement summary for an already analysed bank statement. The summary holds key details such as total money in the customer&#39;s account, how much money has gone in and out of the account and a time period of when the data is accounted for.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET localhost:3000/api/v1/statement_summaries/&lt;ID&gt;</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the Statement Summary. (Obtained when you submitted bank statement for analysis)</td>
+</tr>
+</tbody></table>
+<h1 id='statement-transaction'>Statement Transaction</h1><h2 id='get-statement-transaction'>Get Statement Transaction</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:3000/api/v1/statement_summaries/&lt;ID&gt;"</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"statement_transaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"03b466d3-1139-4da0-b047-5d3509b1d1c9"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">30.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">" ATM Charges FTC2545JNSHF"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"remaining_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">19070.84</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description_metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NCBA Wabera ATM2 Nairobi KE 425199......9046"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"transacted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-03T00:00:00.000Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint queries for an existing statement transcation for an already analysed bank statement.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET localhost:3000/api/v1/statement_summaries/&lt;ID&gt;</code></p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the specific Statement Transaction. (Obtained when you submitted bank statement for analysis)</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
