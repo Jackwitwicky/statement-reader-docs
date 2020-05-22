@@ -266,7 +266,6 @@
       </ul>
         <ul class="toc-footer">
             <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -369,7 +368,7 @@ when submitting analysis requests</p>
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:3000/api/v1/analysis_request"</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://statement-readr.herokuapp.com/api/v1/analysis_request"</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
 
@@ -418,7 +417,7 @@ when submitting analysis requests</p>
 </span></code></pre></div>
 <p>This endpoint submits a bank statement to obtain analysis data</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>POST localhost:3000/api/v1/analysis_request</code></p>
+<p><code>POST https://statement-readr.herokuapp.com/api/v1/analysis_request</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -455,7 +454,7 @@ Remember — In future this endpoint will need to be Authenticated
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:3000/api/v1/analysis_requests/&lt;ID&gt;"</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://statement-readr.herokuapp.com/api/v1/analysis_requests/&lt;ID&gt;"</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
 
@@ -476,7 +475,7 @@ Remember — In future this endpoint will need to be Authenticated
 </span></code></pre></div>
 <p>This endpoint retrieves a specific Analysis Request. It can be used to check the status of the request allowing you to only fetch the full analysis request details when the status is <code>success</code>. It will also show if the submitted request failed</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET localhost:3000/api/v1/analysis_requests/&lt;ID&gt;</code></p>
+<p><code>GET https://statement-readr.herokuapp.com/api/v1/analysis_requests/&lt;ID&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -497,7 +496,7 @@ Remember — In future this endpoint will need to be Authenticated
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:3000/api/v1/fetch_analysis/statement_id"</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://statement-readr.herokuapp.com/api/v1/fetch_analysis/statement_id"</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
 
@@ -546,7 +545,7 @@ Remember — In future this endpoint will need to be Authenticated
 </span></code></pre></div>
 <p>This endpoint retrieves a specific Analysis Result.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>GET localhost:3000/api/v1/fetch_analysis/&lt;ID&gt;</code></p>
+<p><code>GET https://statement-readr.herokuapp.com/api/v1/fetch_analysis/&lt;ID&gt;</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -567,7 +566,7 @@ Remember — In future this endpoint will need to be Authenticated
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:3000/api/v1/statement_summaries/&lt;ID&gt;"</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://statement-readr.herokuapp.com/api/v1/statement_summaries/&lt;ID&gt;"</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
 
@@ -592,7 +591,7 @@ Remember — In future this endpoint will need to be Authenticated
 </span></code></pre></div>
 <p>This endpoint queries for an existing statement summary for an already analysed bank statement. The summary holds key details such as total money in the customer&#39;s account, how much money has gone in and out of the account and a time period of when the data is accounted for.</p>
 <h3 id='http-request-4'>HTTP Request</h3>
-<p><code>GET localhost:3000/api/v1/statement_summaries/&lt;ID&gt;</code></p>
+<p><code>GET https://statement-readr.herokuapp.com/api/v1/statement_summaries/&lt;ID&gt;</code></p>
 <h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -613,7 +612,7 @@ Remember — In future this endpoint will need to be Authenticated
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:3000/api/v1/statement_summaries/&lt;ID&gt;"</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://statement-readr.herokuapp.com/api/v1/statement_summaries/&lt;ID&gt;"</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
 
@@ -637,7 +636,7 @@ Remember — In future this endpoint will need to be Authenticated
 </span></code></pre></div>
 <p>This endpoint queries for an existing statement transcation for an already analysed bank statement.</p>
 <h3 id='http-request-5'>HTTP Request</h3>
-<p><code>GET localhost:3000/api/v1/statement_summaries/&lt;ID&gt;</code></p>
+<p><code>GET https://statement-readr.herokuapp.com/api/v1/statement_summaries/&lt;ID&gt;</code></p>
 <h3 id='query-parameters-3'>Query Parameters</h3>
 <table><thead>
 <tr>
